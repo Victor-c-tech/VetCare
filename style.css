@@ -1,0 +1,491 @@
+/* style.css */
+
+/* -------------------- */
+/* VARIABLES CSS        */
+/* -------------------- */
+:root {
+    /* Paleta Principal (Modo Claro) */
+    --primary-color: #4A7C59; /* Azul oscuro */
+    --secondary-color: #E8D5B5; /* Verde azulado */
+    --accent-color: #A52A2A; /* Naranja */
+    --background-color: #FFFDD0;
+    --text-color: #34495e;
+    --card-bg-color: #ffffff;
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --border-color: #ff0000; /* Borde Rojo para modo claro */
+    --luminous-border: none;
+    --navbar-bg: rgba(44, 62, 80, 0.9);
+}
+
+[data-theme="dark"] {
+    --primary-color: #34495e; 
+    --secondary-color: #18BC9C;
+    --accent-color: #F39C12;
+    --background-color: #1a1a2e; /* Fondo oscuro */
+    --text-color: #e0e0e0; /* Texto claro */
+    --card-bg-color: #16213e;
+    --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    --border-color: transparent;
+    --luminous-border: 0 0 15px var(--secondary-color); /* Borde luminoso para modo oscuro */
+    --navbar-bg: rgba(22, 33, 62, 0.9);
+
+    /* --- INICIO DE LA CORRECCIÓN --- */
+    /* Sobrescribimos la variable de color de texto principal de Bootstrap para el modo oscuro. */
+    /* Esto asegura que todos los componentes, como el texto en las tarjetas, hereden el color claro. */
+    --bs-body-color: var(--text-color);
+    /* --- FIN DE LA CORRECCIÓN --- */
+}
+
+/* -------------------- */
+/* CONFIGURACIÓN GLOBAL */
+/* -------------------- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+}
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] h6 {
+    color: var(--text-color);
+}
+
+section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.section-title {
+    font-weight: bold;
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+[data-theme="dark"] .section-title {
+    color: var(--secondary-color);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* -------------------- */
+/* NAVEGACIÓN           */
+/* -------------------- */
+.navbar {
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--secondary-color) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    color: var(--accent-color) !important;
+}
+
+#theme-toggle i {
+    transition: transform 0.3s ease-in-out;
+}
+[data-theme="dark"] #theme-toggle i {
+    transform: rotate(180deg);
+}
+
+/* -------------------- */
+/* SECCIÓN INICIO (HERO) */
+/* -------------------- */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    overflow: hidden;
+    color: white;
+}
+
+.hero-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    animation: zoomIn 20s infinite alternate;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.btn-cta {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+    padding: 1rem 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: var(--card-shadow);
+}
+
+.btn-cta:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/* -------------------- */
+/* SECCIÓN SERVICIOS    */
+/* -------------------- */
+.service-card {
+    background-color: var(--card-bg-color);
+    border: none;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    animation: fadeIn 1s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+[data-theme="dark"] .service-card {
+    box-shadow: var(--luminous-border);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.service-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-top: -40px;
+    position: relative;
+    z-index: 1;
+    border: 5px solid var(--card-bg-color);
+}
+
+/* -------------------- */
+/* SECCIÓN EQUIPO       */
+/* -------------------- */
+.team-member {
+    background-color: var(--card-bg-color);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    transform: scale(1.05);
+}
+
+.team-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--secondary-color);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+[data-theme="dark"] .team-photo {
+    box-shadow: var(--luminous-border);
+}
+.team-member:hover .team-photo {
+    transform: rotate(5deg);
+}
+
+/* -------------------- */
+/* SECCIÓN TESTIMONIOS   */
+/* -------------------- */
+#testimonios {
+    background-color: var(--primary-color);
+}
+[data-theme="dark"] #testimonios {
+    background-color: #0f172a;
+}
+#testimonios .section-title {
+    color: white;
+}
+
+.testimonial-card {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid transparent;
+    animation: rainbow-border 5s linear infinite;
+}
+@keyframes rainbow-border {
+    0% { border-color: #ff0000; }
+    16% { border-color: #ff7f00; }
+    33% { border-color: #ffff00; }
+    50% { border-color: #00ff00; }
+    66% { border-color: #0000ff; }
+    83% { border-color: #4b0082; }
+    100% { border-color: #9400d3; }
+}
+
+
+.testimonial-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid var(--secondary-color);
+    object-fit: cover;
+    margin-bottom: 1rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.1); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.1); }
+    70% { transform: scale(1); }
+}
+
+.carousel-controls-external {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+.carousel-controls-external .carousel-control-prev,
+.carousel-controls-external .carousel-control-next {
+    position: static;
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    opacity: 0.8;
+    margin: 0 10px;
+}
+.carousel-controls-external .carousel-control-prev:hover,
+.carousel-controls-external .carousel-control-next:hover {
+    opacity: 1;
+    background-color: var(--accent-color);
+}
+/* Ocultar tarjetas extra en vistas más pequeñas del carrusel */
+@media (max-width: 991.98px) {
+    .carousel-item .col-md-6:nth-child(n+3) {
+        display: none;
+    }
+}
+@media (min-width: 992px) {
+    .carousel-item .col-lg-3:nth-child(n+5) {
+        display: none;
+    }
+}
+
+/* -------------------- */
+/* SECCIÓN CONTACTO     */
+/* -------------------- */
+.contact-info-card, .contact-form-card {
+    background-color: var(--card-bg-color);
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+.contact-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.2);
+}
+.phone-card {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+.phone-card a {
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.phone-card:hover {
+    background-color: var(--secondary-color);
+}
+.btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+    font-weight: bold;
+}
+.btn-whatsapp:hover {
+    background-color: #128C7E;
+    color: white;
+}
+.form-control {
+    background-color: var(--background-color);
+    border: 1px solid #ccc;
+    color: var(--text-color);
+}
+.form-control:focus {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.25rem rgba(24, 188, 156, 0.25);
+}
+[data-theme="dark"] .form-control {
+    background-color: #34495e;
+    border-color: #556677;
+    color: var(--text-color);
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* -------------------- */
+/* FOOTER               */
+/* -------------------- */
+.footer {
+    background-color: var(--primary-color);
+}
+[data-theme="dark"] .footer {
+    background-color: #16213e;
+}
+
+.social-icons .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+.social-icons .social-icon:hover {
+    background-color: white;
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* -------------------- */
+/* MODAL                */
+/* -------------------- */
+.modal-content {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+}
+.modal-header {
+    border-bottom-color: var(--secondary-color);
+}
+.modal-footer {
+    border-top-color: var(--secondary-color);
+}
+
+/* -------------------- */
+/* MEDIA QUERIES        */
+/* -------------------- */
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        text-align: center;
+        background-color: var(--navbar-bg);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+}
+@media (max-width: 767.98px) {
+    .hero-section {
+        height: 80vh;
+    }
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .testimonial-carousel-item {
+        padding: 0 15px;
+    }
+}
